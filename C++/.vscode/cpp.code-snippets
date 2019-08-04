@@ -1,0 +1,11 @@
+{
+    "in": {
+        "prefix": "in",
+        "body": [
+            "vector<${1:typename}> ${2:name}(${3:N});",
+            "for (int i=0; i<${3:N}; i++) {",
+            "   cin >> ${2:name}.at(i);",
+            "}"
+        ]
+    }
+}
