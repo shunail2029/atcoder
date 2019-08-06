@@ -8,11 +8,11 @@
             "}"
         ]
     },
-    "for_me": {
-        "prefix": "for_me",
+    "for": {
+        "prefix": "for",
         "body": [
-            "for (int ${1:var}=${2:0}; ${1:var}<${3:end}; i++) {",
-            "\t${4:code}",
+            "for (int ${1:var}=${2:0}; ${1:var}<${3:end}; ${1:var}${4:ope}) {",
+            "\t${5:code}",
             "}"
         ]
     }
