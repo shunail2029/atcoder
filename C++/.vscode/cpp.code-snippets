@@ -9,7 +9,7 @@
         ]
     },
     "for": {
-        "prefix": "for",
+        "prefix": "fo",
         "body": [
             "for (int ${1:var}=${2:0}; ${1:var}<${3:end}; ${1:var}${4:ope}) {",
             "\t${5:code}",
