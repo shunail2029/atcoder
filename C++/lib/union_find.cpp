@@ -7,7 +7,7 @@ class union_find {
         union_find(int);
         int find(int);
         bool same(int, int);
-        void unite(int , int);
+        void unite(int, int);
 };
 
 union_find::union_find(int n) {
