@@ -1,18 +1,18 @@
 {
     "map": {
-        "prefix": "map_me",
+        "prefix": "map",
         "body": [
             "map(int, input().split())"
         ]
     },
     "list": {
-        "prefix": "list_me",
+        "prefix": "list",
         "body": [
             "list(map(int, input().split()))"
         ]
     },
     "for": {
-        "prefix": "for_me",
+        "prefix": "for",
         "body": [
             "for ${1:var} in range(${2:ran}):",
             "\t"
