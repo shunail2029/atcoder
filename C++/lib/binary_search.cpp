@@ -7,7 +7,7 @@ long long binary_searching(std::vector<long long> &str, long long key, long long
     if (str.at(imid) < key) {
         return binary_searching(str, key, imid+1, imax);
     }
-    else if (str,at(imid) > key) {
+    else if (str.at(imid) > key) {
         return binary_searching(str, key, imin, imid-1);
     }
     else {
