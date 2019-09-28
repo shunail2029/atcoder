@@ -4,6 +4,7 @@
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
+#include <functional>
 #include <iomanip>
 #include <iostream>
 #include <queue>
