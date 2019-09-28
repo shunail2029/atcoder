@@ -9,13 +9,13 @@ long long comb(long long n, long long r) {
 #define mod 1000000007
 
 long long inv(long long n) {
-    long long ret = 1;
+    long long res = 1;
     while (n > 1) {
-        ret *= (mod - mod/n);
-        ret %= mod;
+        res *= (mod - mod/n);
+        res %= mod;
         n = mod % n;
     }
-    return ret;
+    return res;
 }
 
 long long comb_mod(long long n, long long r) {
