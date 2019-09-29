@@ -9,7 +9,8 @@ long long dijkstra(WGraph G, int s, int t) {
     int n = (int)G.size();
     std::vector<long long> dis(n, 1e16);
     dis.at(s) = 0;
-    std::priority_queue<std::pair<long long, int>> que;
+    using P = std::pair<long long, int>;
+    std::priority_queue<P, std::vector<P>, std::greater<P>> que;
     que.push(std::make_pair(0, s));
 
     while (!que.empty()) {
@@ -35,7 +36,8 @@ long long dijkstra(WGraph G, int s, int t, std::vector<int> &path) {
     std::vector<long long> dis(n, 1e16);
     std::vector<int> prev(n, -1);
     dis.at(s) = 0;
-    std::priority_queue<std::pair<long long, int>> que;
+    using P = std::pair<long long, int>;
+    std::priority_queue<P, std::vector<P>, std::greater<P>> que;
     que.push(std::make_pair(0, s));
 
     while (!que.empty()) {
