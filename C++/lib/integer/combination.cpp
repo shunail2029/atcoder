@@ -21,12 +21,18 @@ long long inv(long long n) {
 long long comb_mod(long long n, long long r) {
     long long nume = 1;
     long long deno = 1;
-    long long r_buf = (r <= n/2) ? r : n-r;
-    for (long long i=1; i<=r_buf; i++) {
+    long long r_new = (r <= n/2) ? r : n-r;
+    if (r_new < 0) {
+        return 0;
+    } else if (r_new == 0) {
+        return 1;
+    }
+    
+    for (long long i=1; i<=r_new; i++) {
         deno *= i % mod;
         deno %= mod;
     }
-    for (long long i=n-r_buf+1; i<=n; i++) {
+    for (long long i=n-r_new+1; i<=n; i++) {
         nume *= i % mod;
         nume %= mod;
     }
