@@ -34,6 +34,7 @@ void union_find::unite(int x, int y) {
     par.at(x_par) = y_par;
 }
 
+// union_find with count
 class union_find_cnt : public union_find {
     private :
         std::vector<int> cnt;
