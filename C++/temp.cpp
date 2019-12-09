@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <bitset>
 #include <climits>
 #include <cmath>
 #include <csignal>
