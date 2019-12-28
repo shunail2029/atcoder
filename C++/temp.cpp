@@ -1,19 +1,4 @@
-#include <algorithm>
-#include <bitset>
-#include <climits>
-#include <cmath>
-#include <csignal>
-#include <cstdio>
-#include <cstdlib>
-#include <functional>
-#include <iomanip>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
-#include <tuple>
-#include <vector>
+#include <bits/stdc++.h>
 
 using Graph = std::vector<std::vector<int>>;
 using WGraph = std::vector<std::vector<std::pair<int, long long>>>;
