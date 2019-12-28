@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
 
-using Graph = std::vector<std::vector<int>>;
-using WGraph = std::vector<std::vector<std::pair<int, long long>>>;
-using ll = long long;
 using namespace std;
-
+using ll = long long;
+using Graph = vector<vector<int>>;
+using WGraph = vector<vector<pair<int, ll>>>;
 
 int main() {
     
