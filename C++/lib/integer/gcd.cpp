@@ -5,6 +5,9 @@ long long gcd(long long a, long long b) {
     if (a < b) {
         std::swap(a, b);
     }
+    if (b == 0) {
+        return a;
+    }
     while (a%b > 0) {
         long long buf = b;
         b = a%b;
