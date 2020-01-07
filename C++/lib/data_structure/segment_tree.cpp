@@ -1,7 +1,7 @@
 #include <functional>
 #include <vector>
 
-template<typename T>
+template<class T>
 class SegmentTree {
     using Func = std::function<T(T, T)>;
     private:
