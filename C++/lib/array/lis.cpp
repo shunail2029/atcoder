@@ -2,8 +2,8 @@
 #include <vector>
 
 // LIS(Longest Increasing Subsequence) 最長増加部分列
-int lis(std::vector<long long> &vec) {
-    int len = vec.size();
+int lis(const std::vector<long long> &vec) {
+    int len = (int)vec.size();
     std::vector<long long> dp(len, 1e16);
     for (int i=0; i<len; i++) {
         long long tmp = vec.at(i);

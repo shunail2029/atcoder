@@ -27,7 +27,7 @@ long long comb_mod(long long n, long long r) {
     } else if (r_new == 0) {
         return 1;
     }
-    
+
     for (long long i=1; i<=r_new; i++) {
         deno *= i % mod;
         deno %= mod;

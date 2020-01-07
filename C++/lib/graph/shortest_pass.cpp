@@ -5,7 +5,7 @@
 using WGraph = std::vector<std::vector<std::pair<int, long long>>>;
 
 // Dijkstra's algorithm ダイクストラ法
-long long dijkstra(WGraph G, int s, int t) {
+long long dijkstra(const WGraph &G, const int s, const int t) {
     int n = (int)G.size();
     std::vector<long long> dis(n, 1e16);
     dis.at(s) = 0;
@@ -31,7 +31,7 @@ long long dijkstra(WGraph G, int s, int t) {
 }
 
 // path restore 経路復元
-long long dijkstra(WGraph G, int s, int t, std::vector<int> &path) {
+long long dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
     int n = (int)G.size();
     std::vector<long long> dis(n, 1e16);
     std::vector<int> prev(n, -1);
@@ -65,10 +65,10 @@ long long dijkstra(WGraph G, int s, int t, std::vector<int> &path) {
 }
 
 // Bellman-Ford algorithm ベルマンフォード法
-long long bellman_ford(WGraph G, int s, int t) {
-    int n = G.size();
+long long bellmanFord(const WGraph &G, const int s, const int t) {
+    int n = (int)G.size();
     std::vector<long long> dis(n);
-    
+
     // find negative loop
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
@@ -106,10 +106,10 @@ long long bellman_ford(WGraph G, int s, int t) {
 }
 
 // restore path 経路復元
-long long bellman_ford(WGraph G, int s, int t, std::vector<int> &path) {
-    int n = G.size();
+long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int> &path) {
+    int n = (int)G.size();
     std::vector<long long> dis(n);
-    
+
     // find negative loop
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
@@ -155,8 +155,8 @@ long long bellman_ford(WGraph G, int s, int t, std::vector<int> &path) {
 }
 
 // Warshall–Floyd algorithm ワーシャルフロイド法
-std::vector<std::vector<long long>> warshall_floyd(WGraph G) {
-    int n = G.size();
+std::vector<std::vector<long long>> warshallFloyd(const WGraph &G) {
+    int n = (int)G.size();
     std::vector<std::vector<long long>> dis(n, std::vector<long long>(n, 1e16));
     for (int i=0; i<n; i++) {
         dis.at(i).at(i) = 0;
