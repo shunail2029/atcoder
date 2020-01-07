@@ -8,6 +8,8 @@ using WGraph = vector<vector<pair<int, ll>>>;
 
 template<class T>bool chmax(T &a, const T &b) { if (b > a) { a = b; return true; } return false; }
 template<class T>bool chmin(T &a, const T &b) { if (b < a) { a = b; return true; } return false; }
+
+int dx[4] = {-1, 0, 0, 1}, dy[4] = {0, -1, 1, 0};
 #pragma endregion
 
 void solve(){}
