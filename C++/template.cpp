@@ -1,9 +1,5 @@
+#pragma region Macros
 #include <bits/stdc++.h>
-
-#define _overload3(_0,_1,_2,name,...) name
-#define _rep(i,n) _repi(i,0,n)
-#define _repi(i,a,b) for(int i=(int)(a);i<(int)(b);i++)
-#define REP(...) _overload3(__VA_ARGS__,_repi,_rep,)(__VA_ARGS__)
 
 using namespace std;
 using ll = long long;
@@ -12,6 +8,7 @@ using WGraph = vector<vector<pair<int, ll>>>;
 
 template<class T>bool chmax(T &a, const T &b) { if (b > a) { a = b; return true; } return false; }
 template<class T>bool chmin(T &a, const T &b) { if (b < a) { a = b; return true; } return false; }
+#pragma endregion
 
 void solve(){}
 
