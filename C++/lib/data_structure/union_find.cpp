@@ -1,5 +1,6 @@
 #include <vector>
 
+// Union-Find
 class UnionFind {
     protected :
         std::vector<int> par;
