@@ -3,11 +3,12 @@
 #include <vector>
 
 using WGraph = std::vector<std::vector<std::pair<int, long long>>>;
+constexpr long long LINF = 1e18;
 
 // Dijkstra's algorithm ダイクストラ法
 long long dijkstra(const WGraph &G, const int s, const int t) {
     int n = (int)G.size();
-    std::vector<long long> dis(n, 1e16);
+    std::vector<long long> dis(n, LINF);
     dis.at(s) = 0;
     using P = std::pair<long long, int>;
     std::priority_queue<P, std::vector<P>, std::greater<P>> que;
@@ -27,13 +28,13 @@ long long dijkstra(const WGraph &G, const int s, const int t) {
             }
         }
     }
-    return dis.at(t) == 1e16 ? -1 : dis.at(t);
+    return dis.at(t) == LINF ? -1 : dis.at(t);
 }
 
 // path restore 経路復元
 long long dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
     int n = (int)G.size();
-    std::vector<long long> dis(n, 1e16);
+    std::vector<long long> dis(n, LINF);
     std::vector<int> prev(n, -1);
     dis.at(s) = 0;
     using P = std::pair<long long, int>;
@@ -61,7 +62,7 @@ long long dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
     }
     reverse(path.begin(), path.end());
 
-    return dis.at(t) == 1e16 ? -1 : dis.at(t);
+    return dis.at(t) == LINF ? -1 : dis.at(t);
 }
 
 // Bellman-Ford algorithm ベルマンフォード法
@@ -76,7 +77,7 @@ long long bellmanFord(const WGraph &G, const int s, const int t) {
                 if (dis.at(e.first) > dis.at(j) + e.second) {
                     dis.at(e.first) = dis.at(j) + e.second;
                     if (i == n-1) {
-                        return (long long)-1e16;
+                        return -LINF;
                     }
                 }
             }
@@ -85,7 +86,7 @@ long long bellmanFord(const WGraph &G, const int s, const int t) {
 
     // seek shortest path
     for (int i=0; i<n; i++) {
-        dis.at(i) = 1e16;
+        dis.at(i) = LINF;
     }
     dis.at(s) = 0;
     while (true) {
@@ -117,7 +118,7 @@ long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int
                 if (dis.at(e.first) > dis.at(j) + e.second) {
                     dis.at(e.first) = dis.at(j) + e.second;
                     if (i == n-1) {
-                        return (long long)-1e16;
+                        return -LINF;
                     }
                 }
             }
@@ -127,7 +128,7 @@ long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int
     // seek shortest path
     std::vector<int> prev(n, -1);
     for (int i=0; i<n; i++) {
-        dis.at(i) = 1e16;
+        dis.at(i) = LINF;
     }
     dis.at(s) = 0;
     while (true) {
@@ -157,7 +158,7 @@ long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int
 // Warshall–Floyd algorithm ワーシャルフロイド法
 std::vector<std::vector<long long>> warshallFloyd(const WGraph &G) {
     int n = (int)G.size();
-    std::vector<std::vector<long long>> dis(n, std::vector<long long>(n, 1e16));
+    std::vector<std::vector<long long>> dis(n, std::vector<long long>(n, LINF));
     for (int i=0; i<n; i++) {
         dis.at(i).at(i) = 0;
     }
