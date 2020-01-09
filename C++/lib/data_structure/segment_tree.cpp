@@ -44,4 +44,5 @@ class SegmentTree {
             }
             return F(vleft, vright);
         }
+        T at(int a) { return dat.at(a+N); }
 };
