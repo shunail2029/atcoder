@@ -1,9 +1,23 @@
 #include <string>
 #include <vector>
 
-int KMP(const std::string &, const std::string &);
-std::vector<int> createTable(const std::string &);
-int getPeriod(const std::string &);
+// create table
+std::vector<int> createTable(const std::string &pattern) {
+    int len_p = (int)pattern.size();
+    std::vector<int> table(len_p);
+    table.at(0) = 0;
+    int j = 0;
+    for (int i=1; i<len_p; i++) {
+        if (pattern.at(i) == pattern.at(j)) {
+            table.at(i) = j;
+            j++;
+        } else {
+            table.at(i) = j;
+            j = 0;
+        }
+    }
+    return table;
+}
 
 // KMP(Knuth–Morris–Pratt) algorithm KMP(クヌース-モリス-プラット)法
 int KMP(const std::string &target, const std::string &pattern) {
@@ -26,24 +40,6 @@ int KMP(const std::string &target, const std::string &pattern) {
         return cur_t - cur_p;
     }
     return -1;
-}
-
-// create table
-std::vector<int> createTable(const std::string &pattern) {
-    int len_p = (int)pattern.size();
-    std::vector<int> table(len_p);
-    table.at(0) = 0;
-    int j = 0;
-    for (int i=1; i<len_p; i++) {
-        if (pattern.at(i) == pattern.at(j)) {
-            table.at(i) = j;
-            j++;
-        } else {
-            table.at(i) = j;
-            j = 0;
-        }
-    }
-    return table;
 }
 
 // check periodicity of pattern
