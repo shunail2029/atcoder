@@ -34,7 +34,7 @@ class RollingHash {
             int ok = 0, ng = len+1;
             while (abs(ok - ng) > 1) {
                 int mid = (ok + ng) / 2;
-                if (get(a, a+mid-1) == get(b, b+mid-1)) {
+                if (get(a, a+mid) == get(b, b+mid)) {
                     ok = mid;
                 } else {
                     ng = mid;
@@ -47,7 +47,7 @@ class RollingHash {
             int ok = 0, ng = len+1;
             while (abs(ok - ng) > 1) {
                 int mid = (ok + ng) / 2;
-                if (get(a, a+mid-1) == T.get(b, b+mid-1)) {
+                if (get(a, a+mid) == T.get(b, b+mid)) {
                     ok = mid;
                 } else {
                     ng = mid;
