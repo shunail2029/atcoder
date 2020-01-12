@@ -45,12 +45,12 @@ int KMP(const std::string &target, const std::string &pattern) {
 // check periodicity of pattern
 int getPeriod(const std::string &pattern) {
     int len_p = (int)pattern.size();
-    if (len_p == 1) return -1;
+    if (len_p == 1) return 0;
     if (len_p == 2) {
         if (pattern.at(0) == pattern.at(1)) {
             return 1;
         } else {
-            return -1;
+            return 0;
         }
     }
 
@@ -59,7 +59,7 @@ int getPeriod(const std::string &pattern) {
     int len = (int)table.size();
     bool isPeriodical = true;
     int period;
-    if (table.at(len-1) == 0) return -1;
+    if (table.at(len-1) == 0) return 0;
     for (int i=len-2; i>=0; i--) {
         if (table.at(i) == 0) {
             period = i;
@@ -69,7 +69,7 @@ int getPeriod(const std::string &pattern) {
         }
     }
     if (!isPeriodical || len%period != 0) {
-        return -1;
+        return 0;
     } else {
         return period;
     }
