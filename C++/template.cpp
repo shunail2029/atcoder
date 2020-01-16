@@ -12,6 +12,8 @@ template<class T>bool chmin(T &a, const T &b) { if (b < a) { a = b; return true;
 constexpr int dx[4] = {-1, 0, 0, 1}, dy[4] = {0, -1, 1, 0};
 constexpr int INF = 1e9;
 constexpr long long LINF = 1e18;
+constexpr long long MOD = 1e9 + 7;
+constexpr double EPS = 1e-10;
 #pragma endregion
 
 void solve(){}
