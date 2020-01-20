@@ -6,14 +6,14 @@ long long comb(long long n, long long r) {
 }
 
 // combination_mod 余りでいい時の組み合わせ数
-constexpr long long mod = 1000000007;
+constexpr long long MOD = 1e9 + 7;
 
 long long inv(long long n) {
     long long res = 1;
     while (n > 1) {
-        res *= (mod - mod/n);
-        res %= mod;
-        n = mod % n;
+        res *= (MOD - MOD/n);
+        res %= MOD;
+        n = MOD % n;
     }
     return res;
 }
@@ -29,13 +29,13 @@ long long comb_mod(long long n, long long r) {
     }
 
     for (long long i=1; i<=r_new; i++) {
-        deno *= i % mod;
-        deno %= mod;
+        deno *= i % MOD;
+        deno %= MOD;
     }
     for (long long i=n-r_new+1; i<=n; i++) {
-        nume *= i % mod;
-        nume %= mod;
+        nume *= i % MOD;
+        nume %= MOD;
     }
     deno = inv(deno);
-    return (deno * nume) % mod;
+    return (deno * nume) % MOD;
 }
