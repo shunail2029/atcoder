@@ -8,14 +8,14 @@ class Point {
     public:
         double x, y;
         Point(double xx = 0.0, double yy = 0.0) : x(xx), y(yy) {}
-        Point operator=(const Point &p) { x = p.x; y = p.y; return *this; }
+        Point& operator=(const Point &p) { x = p.x; y = p.y; return *this; }
 };
 inline Point operator+(const Point &p) { return Point(p.x, p.y); }
 inline Point operator-(const Point &p) { return Point(-p.x, -p.y); }
 inline Point operator+(const Point &p, const Point &q) { return Point(p.x + q.x, p.y + q.y); }
 inline Point operator-(const Point &p, const Point &q) { return Point(p.x - q.x, p.y - q.y); }
-inline Point operator+=(Point &p, const Point &q) { p.x += q.x; p.y += q.y; return p; }
-inline Point operator-=(Point &p, const Point &q) { p.x -= q.x; p.y -= q.y; return p; }
+inline Point& operator+=(Point &p, const Point &q) { p.x += q.x; p.y += q.y; return p; }
+inline Point& operator-=(Point &p, const Point &q) { p.x -= q.x; p.y -= q.y; return p; }
 inline Point operator*(const Point &p, double v) { return Point(p.x * v, p.y * v); }
 inline Point operator*(double v, const Point &p) { return Point(p.x * v, p.y * v); }
 inline Point operator/(const Point &p, double v) { return Point(p.x / v, p.y / v); }
@@ -35,7 +35,7 @@ class Circle {
         Circle() : center(Point(0.0, 0.0)), r(0.0) {}
         Circle(double cx, double cy, double rr) : center(Point(cx, cy)), r(rr) {}
         Circle(Point p, double rr) : center(p), r(rr) {}
-        Circle operator=(const Circle &c) { center = c.center; r = c.r; return *this; }
+        Circle& operator=(const Circle &c) { center = c.center; r = c.r; return *this; }
 };
 inline Circle mv(const Circle &c, double x, double y) { return Circle(c.center.x + x, c.center.y + y, c.r); }
 inline bool eq(const Circle &c, const Circle &d) { return dis(c.center, d.center) < EPS && abs(c.r - d.r) < EPS; }
