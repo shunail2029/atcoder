@@ -3,14 +3,18 @@
         "prefix": "in",
         "body": [
             "vector<${1:typename}> ${2:name}(${3:N});",
-            "for (int i=0; i<${3:N}; i++) cin >> ${2:name}.at(i);"
+            "for (int i=0; i<${3:N}; i++) {",
+            "\tcin >> ${2:name}.at(i);",
+            "}"
         ]
     },
     "in_pair": {
         "prefix": "inpair",
         "body": [
             "vector<pair<${1:typename1}, ${2:typename2}>> ${3:name}(${4:N});",
-            "for (int i=0; i<${4:N}; i++) cin >> ${3:name}.at(i).first >> ${3:name}.at(i).second;"
+            "for (int i=0; i<${4:N}; i++) {",
+            "\tcin >> ${3:name}.at(i).first >> ${3:name}.at(i).second;",
+            "}"
         ]
     },
     "all": {
