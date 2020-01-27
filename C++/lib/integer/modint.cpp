@@ -10,6 +10,7 @@ class ModInt {
     public:
         ModInt(const long long v = 0) : val(v%mod) { if (val < 0) val += mod; }
         ModInt(const ModInt &v) : val(v.val) {}
+        ModInt &operator=(const long long v) { val = v; return *this; }
         ModInt &operator=(const ModInt &v) { if (this != &v) val = v.val; return *this; }
         ModInt operator+() const { return ModInt(val); }
         ModInt operator-() const { return ModInt(-val); }
