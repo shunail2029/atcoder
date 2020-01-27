@@ -9,7 +9,7 @@ class Point {
         double x, y;
         Point(double xx = 0.0, double yy = 0.0) : x(xx), y(yy) {}
         Point(const Point &p) : x(p.x), y(p.y) {}
-        Point& operator=(const Point &p) { x = p.x; y = p.y; return *this; }
+        Point& operator=(const Point &p) { if (this != &p) { x = p.x; y = p.y; } return *this; }
         Point operator+() const { return Point(x, y); }
         Point operator-() const { return Point(-x, -y); }
         Point operator+(const Point &p) const { return Point(*this) += p; }
