@@ -16,7 +16,7 @@ bool isPrime(long long n) {
 // devisor enumeration 約数列挙
 std::vector<long long> divEnu(long long n) {
     std::vector<long long> res;
-    for (long long i=2; i*i<=n; i++) {
+    for (long long i=1; i*i<=n; i++) {
         if (n%i == 0) {
             res.push_back(i);
             if (n/i != i) {
