@@ -24,6 +24,7 @@ class Point {
         friend Point rot(const Point &p, double angle) { return Point(std::cos(angle) * p.x - std::sin(angle) * p.y, std::sin(angle) * p.x + std::cos(angle) * p.y); }
         friend Point rot90(const Point &p) { return Point(-p.y, p.x); }
         friend double dot(const Point &p, const Point &q) { return p.x * q.x + p.y * q.y; }
+        friend double cross(const Point &p, const Point &q) { return p.x * q.y - p.y * q.x; }
         friend double abs(const Point &p) { return sqrt(dot(p, p)); }
         friend double dis(const Point &p, const Point &q) { return abs(p - q); }
         friend bool eq(const Point &p, const Point &q) { return dis(p, q) < EPS; }
