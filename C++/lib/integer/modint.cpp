@@ -19,7 +19,7 @@ class ModInt {
         ModInt operator*(const ModInt &v) const { return ModInt(*this) *= v; }
         ModInt operator/(const ModInt &v) const { return ModInt(*this) /= v; }
         ModInt &operator+=(const ModInt &v) { val += v.val; if (val >= mod) val -= mod; return *this; }
-        ModInt &operator-=(const ModInt &v) { val *= v.val; if (val < 0) val += mod; return *this; }
+        ModInt &operator-=(const ModInt &v) { val -= v.val; if (val < 0) val += mod; return *this; }
         ModInt &operator*=(const ModInt &v) { val *= v.val; if (val >= mod) val %= mod; return *this; }
         ModInt &operator/=(const ModInt &v) { val *= v.inverse(); if (val >= mod) val %= mod; return *this; }
         ModInt &operator++() { ++val; if (val >= mod) val -= mod; return *this; }
@@ -39,7 +39,7 @@ class ModInt {
             }
             return ModInt(res);
         }
-        friend ModInt pow(ModInt v, long long n) {
+        friend ModInt modpow(ModInt v, long long n) {
             ModInt res(1);
             for ( ; n>0; n>>=1) {
                 if (n & 1) res *= v;

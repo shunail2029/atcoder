@@ -6,7 +6,7 @@ long long comb(long long n, long long r) {
 }
 
 // combination_mod 余りでいい時の組み合わせ数
-constexpr long long MOD = 1e9 + 7;
+constexpr int MOD = 1e9 + 7;
 
 long long inv(long long n) {
     long long res = 1;
