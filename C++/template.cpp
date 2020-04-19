@@ -1,4 +1,3 @@
-#pragma region Macros
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,7 +14,6 @@ constexpr int MOD = 1e9 + 7;
 constexpr long long LINF = 1e18;
 constexpr double EPS = 1e-10;
 constexpr double PI = M_PI;
-#pragma endregion
 
 void solve(){}
 
