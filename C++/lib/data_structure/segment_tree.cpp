@@ -36,7 +36,7 @@ class SegmentTree {
         }
         T get(int a, int b, int k, int l, int r) {
             if (b <= l || r <= a) return DEF;
-            if (l <= a && b <= r) return dat.at(k);
+            if (a <= l && r <= b) return dat.at(k);
             T vleft = get(a, b, 2*k, l, (l+r)/2);
             T vright = get(a, b, 2*k+1, (l+r)/2, r);
             return F(vleft, vright);
