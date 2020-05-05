@@ -16,17 +16,21 @@ class SegmentTree {
             while (N < n) N *= 2;
             dat.assign(2*N, DEF);
         }
+        // a is 0-indexed
         void set(int a, const T v) {
             dat.at(a+N) = v;
         }
         void build() {
             for (int i=N-1; i>0; --i) dat.at(i) = F(dat.at(2*i), dat.at(2*i+1));
         }
+        // a is 0-indexed
         void update(int a, const T v) {
             int cur = a + N;
             dat.at(cur) = v;
             while ((cur /= 2) > 0) dat.at(cur) = F(dat.at(2*cur), dat.at(2*cur+1));
         }
+        // return value of [a, b)
+        // a and b are 0-indexed
         T get(int a, int b) {
             return get(a, b, 1, 0, N);
         }
@@ -37,6 +41,7 @@ class SegmentTree {
             T vright = get(a, b, 2*k+1, (l+r)/2, r);
             return F(vleft, vright);
         }
+        // a is 0-indexed
         T at(int a) { return dat.at(a+N); }
 };
 
