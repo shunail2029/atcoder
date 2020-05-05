@@ -27,11 +27,14 @@ class SegmentTree {
             dat.at(cur) = v;
             while ((cur /= 2) > 0) dat.at(cur) = F(dat.at(2*cur), dat.at(2*cur+1));
         }
-        T get(int a, int b, int k=0, int l=0, int r=N) {
+        T get(int a, int b) {
+            return get(a, b, 1, 0, N);
+        }
+        T get(int a, int b, int k, int l, int r) {
             if (b <= l || r <= a) return DEF;
             if (l <= a && b <= r) return dat.at(k);
-            int vleft = get(a, b, 2*k, l, (l+r)/2);
-            int vright = get(a, b, 2*k+1, (l+r)/2, r);
+            T vleft = get(a, b, 2*k, l, (l+r)/2);
+            T vright = get(a, b, 2*k+1, (l+r)/2, r);
             return F(vleft, vright);
         }
         T at(int a) { return dat.at(a+N); }
