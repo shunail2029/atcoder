@@ -15,7 +15,18 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "cp",
+            "args": [
+                "${workspaceFolder}/template.cpp",
+                "${file}"
+            ],
+            "group": "none",
+            "problemMatcher": []
         }
     ],
-    "version": "2.0.0"
+    "version": "2.0.0",
 }

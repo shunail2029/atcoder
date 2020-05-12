@@ -22,5 +22,11 @@
         "body": [
             "${1:name}.begin(), ${1:name}.end()"
         ]
-    }
+    },
+    "rall": {
+        "prefix": "rall",
+        "body": [
+            "${1:name}.rbegin(), ${1:name}.rend()"
+        ]
+    },
 }

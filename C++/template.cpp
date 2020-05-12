@@ -15,7 +15,7 @@ constexpr long long LINF = 1e18;
 constexpr double EPS = 1e-10;
 constexpr double PI = M_PI;
 
-void solve(){}
+void solve() {}
 
 int main() {
     ios::sync_with_stdio(false);
