@@ -31,10 +31,10 @@ class SegmentTree {
         }
         // return value of [a, b)
         // a and b are 0-indexed
-        T get(int a, int b) {
+        T get(int a, int b) const {
             return get(a, b, 1, 0, N);
         }
-        T get(int a, int b, int k, int l, int r) {
+        T get(int a, int b, int k, int l, int r) const {
             if (b <= l || r <= a) return DEF;
             if (a <= l && r <= b) return dat.at(k);
             T vleft = get(a, b, 2*k, l, (l+r)/2);
@@ -42,7 +42,7 @@ class SegmentTree {
             return F(vleft, vright);
         }
         // a is 0-indexed
-        T at(int a) { return dat.at(a+N); }
+        T at(int a) const { return dat.at(a+N); }
 };
 
 

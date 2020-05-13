@@ -17,7 +17,7 @@ class BinaryIndexedTree {
         }
         // return sum of [1, a]
         // a is 1-indexed
-        T sum(int a) {
+        T sum(int a) const {
             T res = static_cast<T>(0);
             while (a > 0) {
                 res += dat.at(a);
@@ -27,7 +27,7 @@ class BinaryIndexedTree {
         }
         // return sum of [a. b)
         // a and b are 1-indexed
-        T sum(int a, int b) {
+        T sum(int a, int b) const {
             return sum(b-1) - sum(a-1);
         }
 };
