@@ -1,9 +1,7 @@
 #include <utility>
 #include <iostream>
 
-constexpr int MOD = 1e9 + 7;
-
-template<int mod = MOD>
+template<int mod>
 class ModInt {
     private:
         long long val;
