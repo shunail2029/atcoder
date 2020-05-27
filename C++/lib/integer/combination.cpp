@@ -1,8 +1,9 @@
 // combination 組み合わせ数
 long long comb(long long n, long long r) {
-    long long r_buf = (r <= n/2) ? r : n-r;
-    if (r_buf == 0) return 1;
-    else return (n-r_buf+1) * comb(n, r_buf-1) / r_buf;
+    long long r_new = (r <= n/2) ? r : n-r;
+    if (r_new < 0) return 0;
+    if (r_new == 0) return 1;
+    else return (n-r_new+1) * comb(n, r_new-1) / r_new;
 }
 
 // combination_mod 余りでいい時の組み合わせ数
