@@ -19,7 +19,7 @@ class ModInt {
         constexpr ModInt &operator+=(const ModInt &v) { val += v.val; if (val >= mod) val -= mod; return *this; }
         constexpr ModInt &operator-=(const ModInt &v) { val -= v.val; if (val < 0) val += mod; return *this; }
         constexpr ModInt &operator*=(const ModInt &v) { val *= v.val; if (val >= mod) val %= mod; return *this; }
-        constexpr ModInt &operator/=(const ModInt &v) { val *= v.inverse(); if (val >= mod) val %= mod; return *this; }
+        constexpr ModInt &operator/=(const ModInt &v) { val *= v.inverse().val; if (val >= mod) val %= mod; return *this; }
         constexpr ModInt &operator++() { ++val; if (val >= mod) val -= mod; return *this; }
         constexpr ModInt &operator--() { --val; if (val < 0) val += mod; return *this; }
         constexpr ModInt operator++(int) { ModInt tmp(*this); operator++(); return tmp; }
