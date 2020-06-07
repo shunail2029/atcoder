@@ -2,18 +2,12 @@
 #include <queue>
 #include <vector>
 
-using WGraph = std::vector<std::vector<std::pair<int, long long>>>;
+using Graph = std::vector<std::vector<int>>;
 constexpr long long LINF = 1e18;
 
 // Edmonds-Karp algorithm
-long long edmondsKarp(const WGraph &G, const int s, const int t) {
+long long edmondsKarp(const Graph &G, std::vector<std::vector<long long>> &cap, const int s, const int t) {
     int n = (int)G.size();
-    std::vector<std::vector<long long>> cap(n, std::vector<long long>(n));
-    for (int i=0; i<n; ++i) {
-        for (auto p : G.at(i)) {
-            cap.at(i).at(p.first) = p.second;
-        }
-    }
 
     long long res = 0;
     std::queue<int> que;
@@ -25,8 +19,7 @@ long long edmondsKarp(const WGraph &G, const int s, const int t) {
         que.push(s);
         while (!que.empty() && prev.at(t) == -1) {
             int cur = que.front(); que.pop();
-            for (auto p : G.at(cur)) {
-                int nx = p.first;
+            for (int nx : G.at(cur)) {
                 if (prev.at(nx) == -1 && cap.at(cur).at(nx) > 0) {
                     prev.at(nx) = cur;
                     que.push(nx);
