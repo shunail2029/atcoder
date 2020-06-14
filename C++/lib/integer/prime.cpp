@@ -46,13 +46,11 @@ std::map<long long, int> primeFact(long long n) {
 std::vector<long long> primeEnu(long long n) {
     std::vector<long long> res;
     std::vector<bool> is_prime(n+1);
-    is_prime.at(0) = is_prime.at(1) = false;
+    is_prime[0] = is_prime[1] = false;
     for (long long i=2; i<=n; i++) {
-        if (is_prime.at(i)) {
+        if (is_prime[i]) {
             res.push_back(i);
-            for (long long j=2*i; j<=n; j+=i) {
-                is_prime.at(j) = false;
-            }
+            for (long long j=2*i; j<=n; j+=i) is_prime[j] = false;
         }
     }
     return res;

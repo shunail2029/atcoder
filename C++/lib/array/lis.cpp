@@ -8,7 +8,7 @@ int lis(const std::vector<long long> &vec) {
     int len = (int)vec.size();
     std::vector<long long> dp(len, LINF);
     for (int i=0; i<len; i++) {
-        long long tmp = vec.at(i);
+        long long tmp = vec[i];
         auto iter = std::lower_bound(dp.begin(), dp.end(), tmp);
         *iter = tmp;
     }

@@ -11,16 +11,14 @@ class SlideMin {
         std::deque<int> dq;
     public :
         SlideMin(std::vector<T> a) : dat(a) {};
-        T getMin() { return dat.at(dq.front()); }
+        T getMin() { return dat[dq.front()]; }
         int getMinIndex() { return dq.front(); }
         void push(const int i) {
-            while (!dq.empty() && Compare()(dat.at(i), dat.at(dq.back()))) {
+            while (!dq.empty() && Compare()(dat[i], dat[dq.back()])) {
                 dq.pop_back();
             }
             dq.push_back(i);
         }
-        void pop(const int i) {
-            if (dq.front() == i) dq.pop_front();
-        }
+        void pop(const int i) { if (dq.front() == i) dq.pop_front(); }
         int size() { return (int)dq.size(); }
 };

@@ -12,7 +12,7 @@ class BinaryIndexedTree {
         // a is 1-indexed
         void add(int a, const T v) {
             while (a <= N) {
-                dat.at(a) += v;
+                dat[a] += v;
                 a += (a & -a);
             }
         }
@@ -21,7 +21,7 @@ class BinaryIndexedTree {
         T sum(int a) const {
             T res = static_cast<T>(0);
             while (a > 0) {
-                res += dat.at(a);
+                res += dat[a];
                 a -= (a & -a);
             }
             return res;
@@ -41,7 +41,7 @@ class BinaryIndexedTreeRMQ {
         std::vector<T> dat, ind;
     public:
         BinaryIndexedTreeRMQ(int n, T def) : N(n), dat(n+1, def), ind(n+1) {
-            for (int i=1; i<n+1; ++i) ind.at(i) = i;
+            for (int i=1; i<n+1; ++i) ind[i] = i;
         }
         // return index of max of [l, r]
         // l and r are 1-indexed
@@ -49,10 +49,10 @@ class BinaryIndexedTreeRMQ {
             int res = 0;
             while (l <= r) {
                 if (r-(r&-r)+1 >= l) {
-                    if (dat.at(ind.at(r)) > dat.at(res)) res = ind.at(r);
+                    if (dat[ind[r]] > dat[res]) res = ind[r];
                     r -= (r & -r);
                 } else {
-                    if (dat.at(r) > dat.at(res)) res = r;
+                    if (dat[r] > dat[res]) res = r;
                     --r;
                 }
             }
@@ -60,25 +60,21 @@ class BinaryIndexedTreeRMQ {
         }
         // return max of [l, r]
         // l and r are 1-indexed
-        T query(int l, int r) const {
-            return dat.at(queryInd(l, r));
-        }
+        T query(int l, int r) const { return dat[queryInd(l, r)]; }
         // a is 1-indexed
         void update(int a, const T v) {
-            dat.at(a) = v;
+            dat[a] = v;
             int cur = a;
             while (cur <= N) {
-                if (ind.at(cur) == a) {
+                if (ind[cur] == a) {
                     int nx = queryInd(cur-(cur&-cur)+1, cur-1);
-                    ind.at(cur) = dat.at(cur) > dat.at(nx) ? cur : nx;
+                    ind[cur] = dat[cur] > dat[nx] ? cur : nx;
                 } else {
-                    if (dat.at(a) > dat.at(ind.at(cur))) ind.at(cur) = a;
+                    if (dat[a] > dat[ind[cur]]) ind[cur] = a;
                 }
                 cur += (cur & -cur);
             }
         }
         // return value of a
-        T at(int a) const {
-            return dat.at(a);
-        }
+        T at(int a) const { return dat.at(a); }
 };

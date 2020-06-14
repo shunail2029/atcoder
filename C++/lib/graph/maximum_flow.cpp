@@ -15,21 +15,21 @@ long long edmondsKarp(const Graph &G, std::vector<std::vector<long long>> &cap, 
     while (true) {
         prev.assign(n, -1);
         std::queue<int>().swap(que);
-        prev.at(s) = s;
+        prev[s] = s;
         que.push(s);
-        while (!que.empty() && prev.at(t) == -1) {
+        while (!que.empty() && prev[t] == -1) {
             int cur = que.front(); que.pop();
-            for (int nx : G.at(cur)) {
-                if (prev.at(nx) == -1 && cap.at(cur).at(nx) > 0) {
-                    prev.at(nx) = cur;
+            for (int nx : G[cur]) {
+                if (prev[nx] == -1 && cap[cur][nx] > 0) {
+                    prev[nx] = cur;
                     que.push(nx);
                 }
             }
         }
-        if (prev.at(t) == -1) return res;
+        if (prev[t] == -1) return res;
         long long inc = LINF;
-        for (int i=t; prev.at(i)!=i; i=prev.at(i)) inc = std::min(inc, cap.at(prev.at(i)).at(i));
-        for (int i=t; prev.at(i)!=i; i=prev.at(i)) cap.at(prev.at(i)).at(i) -= inc;
+        for (int i=t; prev[i]!=i; i=prev[i]) inc = std::min(inc, cap[prev[i]][i]);
+        for (int i=t; prev[i]!=i; i=prev[i]) cap[prev[i]][i] -= inc;
         res += inc;
     }
 }

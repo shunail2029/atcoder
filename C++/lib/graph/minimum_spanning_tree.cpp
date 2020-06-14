@@ -12,21 +12,19 @@ long long prim(const WGraph &G) {
     long long res = 0;
     using P = std::pair<long long, int>;
     std::priority_queue<P, std::vector<P>, std::greater<P>> que;
-    used.at(0) = true;
-    for (auto e : G.at(0)) {
+    used[0] = true;
+    for (auto e : G[0]) {
         que.push(std::make_pair(e.second, e.first));
     }
     while (!que.empty()) {
         auto p = que.top();
         que.pop();
         int v = p.second;
-        if (used.at(v)) {
-            continue;
-        }
-        used.at(v) = true;
+        if (used[v]) continue;
+        used[v] = true;
         res += p.first;
-        for (auto e : G.at(v)) {
-            if (!used.at(e.first)) {
+        for (auto e : G[v]) {
+            if (!used[e.first]) {
                 que.push(std::make_pair(e.second, e.first));
             }
         }
@@ -41,7 +39,7 @@ long long kruskal(const WGraph &G) {
     int n = (int)G.size();
     std::vector<std::tuple<long long, int, int>> edge;
     for (int i=0; i<n; i++) {
-        for (auto e : G.at(i)) {
+        for (auto e : G[i]) {
             edge.push_back(std::make_tuple(e.second, i, e.first));
         }
     }

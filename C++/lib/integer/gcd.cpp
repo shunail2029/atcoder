@@ -6,9 +6,9 @@ long long gcd(long long a, long long b) {
     if (b == 0) return a;
 
     while (b > 0) {
-        long long buf = b;
+        long long tmp = b;
         b = a%b;
-        a = buf;
+        a = tmp;
     }
     return a;
 }

@@ -10,25 +10,21 @@ std::vector<int> topologicalSort(const Graph &G) {
     std::vector<int> cntIn(n);
     for (auto vec : G) {
         for (int x : vec) {
-            cntIn.at(x)++;
+            ++cntIn[x];
         }
     }
 
     std::vector<int> res;
     std::stack<int> st;
     for (int i=0; i<n; i++) {
-        if (cntIn.at(i) == 0) {
-            st.push(i);
-        }
+        if (cntIn[i] == 0) st.push(i);
     }
     while (!st.empty()) {
         int cur = st.top(); st.pop();
         res.push_back(cur);
-        for (int x : G.at(cur)) {
-            cntIn.at(x)--;
-            if (cntIn.at(x) == 0) {
-                st.push(x);
-            }
+        for (int x : G[cur]) {
+            --cntIn[x];
+            if (cntIn[x] == 0) st.push(x);
         }
     }
 

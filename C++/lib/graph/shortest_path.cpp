@@ -9,7 +9,7 @@ constexpr long long LINF = 1e18;
 long long dijkstra(const WGraph &G, const int s, const int t) {
     int n = (int)G.size();
     std::vector<long long> dis(n, LINF);
-    dis.at(s) = 0;
+    dis[s] = 0;
     using P = std::pair<long long, int>;
     std::priority_queue<P, std::vector<P>, std::greater<P>> que;
     que.push(std::make_pair(0, s));
@@ -18,17 +18,15 @@ long long dijkstra(const WGraph &G, const int s, const int t) {
         auto p = que.top();
         que.pop();
         int v = p.second;
-        if (dis.at(v) < p.first) {
-            continue;
-        }
-        for (auto e : G.at(v)) {
-            if (dis.at(e.first) > dis.at(v) + e.second) {
-                dis.at(e.first) = dis.at(v) + e.second;
-                que.push(std::make_pair(dis.at(e.first), e.first));
+        if (dis[v] < p.first) continue;
+        for (auto e : G[v]) {
+            if (dis[e.first] > dis[v] + e.second) {
+                dis[e.first] = dis[v] + e.second;
+                que.push(std::make_pair(dis[e.first], e.first));
             }
         }
     }
-    return dis.at(t) == LINF ? -1 : dis.at(t);
+    return dis[t] == LINF ? -1 : dis[t];
 }
 
 // path restore 経路復元
@@ -36,7 +34,7 @@ long long dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
     int n = (int)G.size();
     std::vector<long long> dis(n, LINF);
     std::vector<int> prev(n, -1);
-    dis.at(s) = 0;
+    dis[s] = 0;
     using P = std::pair<long long, int>;
     std::priority_queue<P, std::vector<P>, std::greater<P>> que;
     que.push(std::make_pair(0, s));
@@ -45,24 +43,22 @@ long long dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
         auto p = que.top();
         que.pop();
         int v = p.second;
-        if (dis.at(v) < p.first) {
-            continue;
-        }
-        for (auto e : G.at(v)) {
-            if (dis.at(e.first) > dis.at(v) + e.second) {
-                dis.at(e.first) = dis.at(v) + e.second;
-                que.push(std::make_pair(dis.at(e.first), e.first));
-                prev.at(e.first) = v;
+        if (dis[v] < p.first) continue;
+        for (auto e : G[v]) {
+            if (dis[e.first] > dis[v] + e.second) {
+                dis[e.first] = dis[v] + e.second;
+                que.push(std::make_pair(dis[e.first], e.first));
+                prev[e.first] = v;
             }
         }
     }
 
-    for (int cur = t; cur != -1; cur = prev.at(cur)) {
+    for (int cur = t; cur != -1; cur = prev[cur]) {
         path.push_back(cur);
     }
     reverse(path.begin(), path.end());
 
-    return dis.at(t) == LINF ? -1 : dis.at(t);
+    return dis[t] == LINF ? -1 : dis[t];
 }
 
 // Bellman-Ford algorithm ベルマンフォード法
@@ -73,37 +69,31 @@ long long bellmanFord(const WGraph &G, const int s, const int t) {
     // find negative loop
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
-            for (auto e : G.at(j)) {
-                if (dis.at(e.first) > dis.at(j) + e.second) {
-                    dis.at(e.first) = dis.at(j) + e.second;
-                    if (i == n-1) {
-                        return -LINF;
-                    }
+            for (auto e : G[j]) {
+                if (dis[e.first] > dis[j] + e.second) {
+                    dis[e.first] = dis[j] + e.second;
+                    if (i == n-1) return -LINF;
                 }
             }
         }
     }
 
     // seek shortest path
-    for (int i=0; i<n; i++) {
-        dis.at(i) = LINF;
-    }
-    dis.at(s) = 0;
+    for (int i=0; i<n; i++) dis[i] = LINF;
+    dis[s] = 0;
     while (true) {
         bool update = false;
         for (int i=0; i<n; i++) {
-            for (auto e : G.at(i)) {
-                if (dis.at(e.first) > dis.at(i) + e.second) {
-                    dis.at(e.first) = dis.at(i) + e.second;
+            for (auto e : G[i]) {
+                if (dis[e.first] > dis[i] + e.second) {
+                    dis[e.first] = dis[i] + e.second;
                     update = true;
                 }
             }
         }
-        if (!update) {
-            break;
-        }
+        if (!update) break;
     }
-    return dis.at(t);
+    return dis[t];
 }
 
 // restore path 経路復元
@@ -114,12 +104,10 @@ long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int
     // find negative loop
     for (int i=0; i<n; i++) {
         for (int j=0; j<n; j++) {
-            for (auto e : G.at(j)) {
-                if (dis.at(e.first) > dis.at(j) + e.second) {
-                    dis.at(e.first) = dis.at(j) + e.second;
-                    if (i == n-1) {
-                        return -LINF;
-                    }
+            for (auto e : G[j]) {
+                if (dis[e.first] > dis[j] + e.second) {
+                    dis[e.first] = dis[j] + e.second;
+                    if (i == n-1) return -LINF;
                 }
             }
         }
@@ -127,51 +115,45 @@ long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int
 
     // seek shortest path
     std::vector<int> prev(n, -1);
-    for (int i=0; i<n; i++) {
-        dis.at(i) = LINF;
-    }
-    dis.at(s) = 0;
+    for (int i=0; i<n; i++) dis[i] = LINF;
+    dis[s] = 0;
     while (true) {
         bool update = false;
         for (int i=0; i<n; i++) {
-            for (auto e : G.at(i)) {
-                if (dis.at(e.first) > dis.at(i) + e.second) {
-                    dis.at(e.first) = dis.at(i) + e.second;
+            for (auto e : G[i]) {
+                if (dis[e.first] > dis[i] + e.second) {
+                    dis[e.first] = dis[i] + e.second;
+                    prev[e.first] = i;
                     update = true;
-                    prev.at(e.first) = i;
                 }
             }
         }
-        if (!update) {
-            break;
-        }
+        if (!update) break;
     }
 
-    for (int cur = t; cur != -1; cur = prev.at(cur)) {
+    for (int cur = t; cur != -1; cur = prev[cur]) {
         path.push_back(cur);
     }
     reverse(path.begin(), path.end());
 
-    return dis.at(t);
+    return dis[t];
 }
 
 // Warshall–Floyd algorithm ワーシャルフロイド法
 std::vector<std::vector<long long>> warshallFloyd(const WGraph &G) {
     int n = (int)G.size();
     std::vector<std::vector<long long>> dis(n, std::vector<long long>(n, LINF));
+    for (int i=0; i<n; i++) dis[i][i] = 0;
     for (int i=0; i<n; i++) {
-        dis.at(i).at(i) = 0;
-    }
-    for (int i=0; i<n; i++) {
-        for (auto e : G.at(i)) {
-            dis.at(i).at(e.first) = e.second;
+        for (auto e : G[i]) {
+            dis[i][e.first] = e.second;
         }
     }
 
     for (int k=0; k<n; k++) {
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
-                dis.at(i).at(j) = std::min(dis.at(i).at(j), dis.at(i).at(k) + dis.at(k).at(j));
+                dis[i][j] = std::min(dis[i][j], dis[i][k] + dis[k][j]);
             }
         }
     }
