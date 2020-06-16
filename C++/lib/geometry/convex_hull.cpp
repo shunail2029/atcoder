@@ -4,18 +4,18 @@
 #include "../geometry/basic.cpp"
 
 // Grahum scan グラハムスキャン
-std::vector<Point> grahumScan(const std::vector<Point> &ps) {
+std::vector<Point> grahumScan(std::vector<Point> ps) {
     int n = (int)ps.size();
 
-    std::sort(ps.begin(), ps.end(), [](Point p, Point q) -> bool { if (p.x != q.x) return p.x < q.x; else return p.y < q.y; });
+    std::sort(ps.begin(), ps.end(), [](Point &p, Point &q) -> bool { if (p.x != q.x) return p.x < q.x; else return p.y < q.y; });
     int k = 0;
     std::vector<Point> res(2*n);
     for (int i=0; i<n; ++i) {
-        while (k > 1 && cross(ps[i]-res[k-1], res[k-1]-res[k-2]) >= 0) --k;
+        while (k > 1 && Point::cross(ps[i]-res[k-1], res[k-1]-res[k-2]) >= 0) --k;
         res[k++] = ps[i];
     }
     for (int i=n-2, t=k; i>=0; --i) {
-        while (k > t && cross(ps[i]-res[k-1], res[k-1]-res[k-2]) >= 0) --k;
+        while (k > t && Point::cross(ps[i]-res[k-1], res[k-1]-res[k-2]) >= 0) --k;
         res[k++] = ps[i];
     }
     res.resize(k-1);
@@ -24,7 +24,7 @@ std::vector<Point> grahumScan(const std::vector<Point> &ps) {
 
 // distance between farthest point pair 最遠点対間距離
 // rotating calipers キャリパー法
-double rotatingCalipers(const std::vector<Point> &ps) {
+double rotatingCalipers(std::vector<Point> ps) {
     std::vector<Point> ch = grahumScan(ps);
     int n = (int)ch.size();
     if (n == 2) return -1.0;
@@ -38,8 +38,8 @@ double rotatingCalipers(const std::vector<Point> &ps) {
     double res = 0.0;
     int i = si, j = sj;
     while (i != si || j != sj) {
-        res = std::max(res, dis(ch[i], ch[j]));
-        if (cross(ch[(i+1)%n]-ch[i], ch[(j+1)%n]-ch[j]) < 0) i = (i+1)%n;
+        res = std::max(res, Point::dis(ch[i], ch[j]));
+        if (Point::cross(ch[(i+1)%n]-ch[i], ch[(j+1)%n]-ch[j]) < 0) i = (i+1)%n;
         else j = (j+1)%n;
     }
     return res;

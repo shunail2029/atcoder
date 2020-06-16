@@ -37,7 +37,7 @@ class ModInt {
             }
             return ModInt(res);
         }
-        friend constexpr ModInt modpow(ModInt v, long long n) {
+        static constexpr ModInt modpow(ModInt v, long long n) {
             ModInt res(1);
             for ( ; n>0; n>>=1) {
                 if (n & 1) res *= v;

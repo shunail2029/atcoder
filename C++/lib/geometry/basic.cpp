@@ -20,14 +20,13 @@ class Point {
         Point& operator-=(const Point &p) { x -= p.x; y -= p.y; return *this; }
         Point& operator*=(double v) { x *= v; y *= v; return *this; }
         Point& operator/=(double v) { x /= v; y /= v; return *this; }
-        friend Point operator*(double v, const Point &p) { return p * v; }
-        friend Point rot(const Point &p, double angle) { return Point(std::cos(angle) * p.x - std::sin(angle) * p.y, std::sin(angle) * p.x + std::cos(angle) * p.y); }
-        friend Point rot90(const Point &p) { return Point(-p.y, p.x); }
-        friend double dot(const Point &p, const Point &q) { return p.x * q.x + p.y * q.y; }
-        friend double cross(const Point &p, const Point &q) { return p.x * q.y - p.y * q.x; }
-        friend double abs(const Point &p) { return sqrt(dot(p, p)); }
-        friend double dis(const Point &p, const Point &q) { return abs(p - q); }
-        friend bool eq(const Point &p, const Point &q) { return dis(p, q) < EPS; }
+        static Point rot(const Point &p, double angle) { return Point(std::cos(angle) * p.x - std::sin(angle) * p.y, std::sin(angle) * p.x + std::cos(angle) * p.y); }
+        static Point rot90(const Point &p) { return Point(-p.y, p.x); }
+        static double dot(const Point &p, const Point &q) { return p.x * q.x + p.y * q.y; }
+        static double cross(const Point &p, const Point &q) { return p.x * q.y - p.y * q.x; }
+        static double abs(const Point &p) { return sqrt(Point::dot(p, p)); }
+        static double dis(const Point &p, const Point &q) { return Point::abs(p - q); }
+        static bool eq(const Point &p, const Point &q) { return Point::dis(p, q) < EPS; }
         friend std::istream& operator>>(std::istream &s, Point &p) { return s >> p.x >> p.y; }
         friend std::ostream& operator<<(std::ostream &s, const Point &p) { return s << "(" << p.x << ", " << p.y << ")"; }
 };
@@ -40,7 +39,7 @@ class Circle {
         Circle(double cx, double cy, double rr) : center(Point(cx, cy)), r(rr) {}
         Circle(Point p, double rr) : center(p), r(rr) {}
         Circle& operator=(const Circle &c) { center = c.center; r = c.r; return *this; }
-        friend Circle mv(const Circle &c, double x, double y) { return Circle(c.center.x + x, c.center.y + y, c.r); }
-        friend bool eq(const Circle &c, const Circle &d) { return dis(c.center, d.center) < EPS && abs(c.r - d.r) < EPS; }
+        static Circle mv(const Circle &c, double x, double y) { return Circle(c.center.x + x, c.center.y + y, c.r); }
+        static bool eq(const Circle &c, const Circle &d) { return Point::dis(c.center, d.center) < EPS && Point::abs(c.r - d.r) < EPS; }
         friend std::ostream& operator<<(std::ostream &s, const Circle &c) { return s << "(" << c.center.x << ", " << c.center.y << ", " << c.r << ")"; }
 };
