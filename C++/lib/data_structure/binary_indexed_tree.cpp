@@ -1,3 +1,4 @@
+#include <functional>
 #include <limits>
 #include <vector>
 
@@ -72,6 +73,46 @@ class BinaryIndexedTreeRMQ {
                 } else {
                     if (dat[a] > dat[ind[cur]]) ind[cur] = a;
                 }
+                cur += (cur & -cur);
+            }
+        }
+        // return value of a
+        T at(int a) const { return dat.at(a); }
+};
+
+// Binary Indexed Tree (BIT)
+template<class T>
+class _BinaryIndexedTree {
+    using Func = std::function<T(T, T)>;
+    private:
+        const Func F;
+        const T DEF;
+        int N;
+        std::vector<T> dat, val;
+    public:
+        _BinaryIndexedTree(int n, const Func f, T def) : F(f), DEF(def), N(n), dat(n+1, def), val(n+1, def) {}
+        // return value of [l, r]
+        // l and r are 1-indexed
+        T query(int l, int r) const {
+            T res = DEF;
+            while (l <= r) {
+                if (r-(r&-r)+1 >= l) {
+                    res = F(val[r], res);
+                    r -= (r & -r);
+                } else {
+                    res = F(dat[r], res);
+                    --r;
+                }
+            }
+            return res;
+        }
+        // a is 1-indexed
+        void update(int a, const T v) {
+            dat[a] = v;
+            int cur = a;
+            while (cur <= N) {
+                T nx = query(cur-(cur&-cur)+1, cur-1);
+                val[cur] = F(nx, dat[cur]);
                 cur += (cur & -cur);
             }
         }
