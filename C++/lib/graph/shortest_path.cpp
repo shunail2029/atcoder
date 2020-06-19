@@ -63,77 +63,56 @@ long long dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
 
 // Bellman-Ford algorithm ベルマンフォード法
 long long bellmanFord(const WGraph &G, const int s, const int t) {
-    int n = (int)G.size();
-    std::vector<long long> dis(n);
-
-    // find negative loop
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<n; j++) {
-            for (auto e : G[j]) {
-                if (dis[e.first] > dis[j] + e.second) {
-                    dis[e.first] = dis[j] + e.second;
-                    if (i == n-1) return -LINF;
-                }
-            }
-        }
-    }
+    int N = (int)G.size();
+    std::vector<long long> dis(N, LINF);
 
     // seek shortest path
-    for (int i=0; i<n; i++) dis[i] = LINF;
     dis[s] = 0;
-    while (true) {
-        bool update = false;
-        for (int i=0; i<n; i++) {
-            for (auto e : G[i]) {
-                if (dis[e.first] > dis[i] + e.second) {
-                    dis[e.first] = dis[i] + e.second;
-                    update = true;
-                }
+    for (int i=0; i<N-1; ++i) {
+        for (int j=0; j<N; ++j) {
+            for (auto e : G[j]) {
+                if (dis[e.first] > dis[j] + e.second) dis[e.first] = dis[j] + e.second;
             }
         }
-        if (!update) break;
     }
+
+    // find negative loop
+    for (int i=0; i<N; ++i) {
+        for (auto e : G[i]) {
+            if (dis[e.first] > dis[i] + e.second) return -LINF;
+        }
+    }
+
     return dis[t];
 }
 
 // restore path 経路復元
 long long bellmanFord(const WGraph &G, const int s, const int t, std::vector<int> &path) {
-    int n = (int)G.size();
-    std::vector<long long> dis(n);
+    int N = (int)G.size();
+    std::vector<long long> dis(N, LINF);
+    std::vector<int> prev(N, -1);
 
-    // find negative loop
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<n; j++) {
+    // seek shortest path
+    dis[s] = 0;
+    for (int i=0; i<N-1; ++i) {
+        for (int j=0; j<N; ++j) {
             for (auto e : G[j]) {
                 if (dis[e.first] > dis[j] + e.second) {
                     dis[e.first] = dis[j] + e.second;
-                    if (i == n-1) return -LINF;
-                }
-            }
-        }
-    }
-
-    // seek shortest path
-    std::vector<int> prev(n, -1);
-    for (int i=0; i<n; i++) dis[i] = LINF;
-    dis[s] = 0;
-    while (true) {
-        bool update = false;
-        for (int i=0; i<n; i++) {
-            for (auto e : G[i]) {
-                if (dis[e.first] > dis[i] + e.second) {
-                    dis[e.first] = dis[i] + e.second;
                     prev[e.first] = i;
-                    update = true;
                 }
             }
         }
-        if (!update) break;
     }
 
-    for (int cur = t; cur != -1; cur = prev[cur]) {
-        path.push_back(cur);
+    // find negative loop
+    for (int i=0; i<N; ++i) {
+        for (auto e : G[i]) {
+            if (dis[e.first] > dis[i] + e.second) return -LINF;
+        }
     }
+
+    for (int cur = t; cur != -1; cur = prev[cur]) path.push_back(cur);
     reverse(path.begin(), path.end());
 
     return dis[t];
