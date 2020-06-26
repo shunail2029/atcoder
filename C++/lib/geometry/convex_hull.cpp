@@ -4,7 +4,7 @@
 #include "../geometry/basic.cpp"
 
 // Grahum scan グラハムスキャン
-std::vector<Point> grahumScan(std::vector<Point> ps) {
+std::vector<Point> GrahumScan(std::vector<Point> ps) {
     int n = (int)ps.size();
 
     std::sort(ps.begin(), ps.end(), [](Point &p, Point &q) -> bool { if (p.x != q.x) return p.x < q.x; else return p.y < q.y; });
@@ -25,7 +25,7 @@ std::vector<Point> grahumScan(std::vector<Point> ps) {
 // distance between farthest point pair 最遠点対間距離
 // rotating calipers キャリパー法
 double rotatingCalipers(std::vector<Point> ps) {
-    std::vector<Point> ch = grahumScan(ps);
+    std::vector<Point> ch = GrahumScan(ps);
     int n = (int)ch.size();
     if (n == 2) return -1.0;
 

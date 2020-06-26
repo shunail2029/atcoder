@@ -6,7 +6,7 @@
 using WGraph = std::vector<std::vector<std::pair<int, long long>>>;
 
 // Prim's algorithm
-long long prim(const WGraph &G) {
+long long Prim(const WGraph &G) {
     int n = (int)G.size();
     std::vector<bool> used(n, false);
     long long res = 0;
@@ -35,7 +35,7 @@ long long prim(const WGraph &G) {
 // Kruskal's algorithm クラスカル法
 // use union_find
 #include "../data_structure/union_find.cpp"
-long long kruskal(const WGraph &G) {
+long long Kruskal(const WGraph &G) {
     int n = (int)G.size();
     std::vector<std::tuple<long long, int, int>> edge;
     for (int i=0; i<n; i++) {

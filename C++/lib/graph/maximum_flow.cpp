@@ -6,7 +6,7 @@ using Graph = std::vector<std::vector<int>>;
 constexpr long long LINF = 1e18;
 
 // Edmonds-Karp algorithm
-long long edmondsKarp(const Graph &G, std::vector<std::vector<long long>> &cap, const int s, const int t) {
+long long EdmondsKarp(const Graph &G, std::vector<std::vector<long long>> &cap, const int s, const int t) {
     int n = (int)G.size();
 
     long long res = 0;
