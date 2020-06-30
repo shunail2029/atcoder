@@ -29,7 +29,7 @@ long long EdmondsKarp(const Graph &G, std::vector<std::vector<long long>> &cap, 
         if (prev[t] == -1) return res;
         long long inc = LINF;
         for (int i=t; prev[i]!=i; i=prev[i]) inc = std::min(inc, cap[prev[i]][i]);
-        for (int i=t; prev[i]!=i; i=prev[i]) cap[prev[i]][i] -= inc;
+        for (int i=t; prev[i]!=i; i=prev[i]) cap[prev[i]][i] -= inc, cap[i][prev[i]] += inc;
         res += inc;
     }
 }
