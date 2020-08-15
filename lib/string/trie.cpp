@@ -22,5 +22,9 @@ class Trie {
             }
             return ptr;
         }
+        void insert(const std::string &str, int val) {
+            Trie *ptr = this->find(str);
+            ptr->val = val;
+        }
         int getVal() const { return val; }
 };
