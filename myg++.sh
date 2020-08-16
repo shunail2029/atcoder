@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ -Wall -std=c++17 -g $1 -lm
+g++ -g -Wall -std=c++17 -fsanitize=undefined,address $1 -lm
