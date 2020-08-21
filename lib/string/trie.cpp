@@ -9,15 +9,13 @@ class Trie {
     public:
         Trie(Trie *parent = nullptr) : parent(parent), children(26, nullptr) {}
         ~Trie() {
-            for (Trie *ptr : children)
-                delete ptr;
+            for (Trie *ptr : children) delete ptr;
         }
         Trie *find(const std::string &str) {
             Trie *ptr = this;
             for (char c : str) {
                 int idx = c - 'a';
-                if (ptr->children[idx] == nullptr)
-                    ptr->children[idx] = new Trie(ptr);
+                if (ptr->children[idx] == nullptr) ptr->children[idx] = new Trie(ptr);
                 ptr = ptr->children[idx];
             }
             return ptr;
