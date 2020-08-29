@@ -45,7 +45,7 @@ std::map<long long, int> primeFact(long long n) {
 // prime enumeration 素数列挙
 std::vector<long long> primeEnu(long long n) {
     std::vector<long long> res;
-    std::vector<bool> is_prime(n+1);
+    std::vector<bool> is_prime(n+1, true);
     is_prime[0] = is_prime[1] = false;
     for (long long i=2; i<=n; i++) {
         if (is_prime[i]) {
