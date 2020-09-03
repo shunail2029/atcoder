@@ -8,7 +8,8 @@
                 "-g",
                 "-Wall",
                 "-std=c++17",
-                "-fsanitize=undefined,address",
+                // "-fsanitize=undefined,address",
+                "-fsanitize=undefined",
                 "${file}",
                 "-lm"
             ],
