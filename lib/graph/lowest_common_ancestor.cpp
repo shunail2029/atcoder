@@ -10,6 +10,13 @@ class LCA {
         Graph G;
         std::vector<int> dis;
         std::vector<std::vector<int>> par;
+        void dfs(int cur, int pre, int depth) {
+            dis[cur] = depth;
+            par[0][cur] = pre;
+            for (int nx : G[cur]) {
+                if (nx != pre) dfs(nx, cur, depth+1);
+            }
+        }
     public:
         LCA(const Graph &g) : N((int)g.size()), G(g) {
             K = 1;
@@ -24,13 +31,6 @@ class LCA {
                     if (par[i-1][j] == -1) par[i][j];
                     else par[i][j] = par[i-1][par[i-1][j]];
                 }
-            }
-        }
-        void dfs(int cur, int pre, int depth) {
-            dis[cur] = depth;
-            par[0][cur] = pre;
-            for (int nx : G[cur]) {
-                if (nx != pre) dfs(nx, cur, depth+1);
             }
         }
         int query(int u, int v) {
