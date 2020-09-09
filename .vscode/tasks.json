@@ -8,6 +8,7 @@
                 "-g",
                 "-Wall",
                 "-std=c++17",
+                "-I./acl",
                 // "-fsanitize=undefined,address",
                 "-fsanitize=undefined",
                 "${file}",
