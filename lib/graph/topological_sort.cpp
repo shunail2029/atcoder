@@ -27,6 +27,5 @@ std::vector<int> topologicalSort(const Graph &G) {
             if (cntIn[x] == 0) st.push(x);
         }
     }
-
     return res;
 }

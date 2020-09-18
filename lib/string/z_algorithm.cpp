@@ -20,6 +20,5 @@ std::vector<int> Zalgorithm(const std::string& s) {
         }
     }
     z[0] = n;
-
     return z;
 }
