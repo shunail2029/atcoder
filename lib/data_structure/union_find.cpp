@@ -4,8 +4,40 @@
 class UnionFind {
     private :
         std::vector<int> par;
+        std::vector<int> sz;
     public :
         UnionFind(int n) {
+            par.resize(n);
+            for (int i=0; i<n; i++) par[i] = i;
+            sz.assign(n, 1);
+        }
+        void unite(int x, int y) {
+            const int x_par = find(x);
+            const int y_par = find(y);
+            if (x_par == y_par) return;
+
+            if (sz[x_par] < sz[y_par]) {
+                par[x_par] = y_par;
+                sz[y_par] += sz[x_par];
+            } else {
+                par[y_par] = x_par;
+                sz[x_par] += sz[y_par];
+            }
+        }
+        int find(int x) {
+            if (par[x] == x) return x;
+            else return par[x] = find(par[x]);
+        }
+        bool same(int x, int y) { return find(x) == find(y); }
+        int size(int x) { return sz[find(x)]; }
+};
+
+// Union-Find
+class _UnionFind {
+    private :
+        std::vector<int> par;
+    public :
+        _UnionFind(int n) {
             par.resize(n);
             for (int i=0; i<n; i++) par[i] = i;
         }
@@ -24,12 +56,12 @@ class UnionFind {
 };
 
 // Union-Find with count
-class UnionFindCnt {
+class _UnionFindCnt {
     private :
         std::vector<int> par;
         std::vector<int> cnt;
     public :
-        UnionFindCnt(int n) {
+        _UnionFindCnt(int n) {
             par.resize(n);
             for (int i=0; i<n; i++) par[i] = i;
             cnt.assign(n, 1);
