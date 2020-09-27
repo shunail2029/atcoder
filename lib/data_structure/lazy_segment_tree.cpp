@@ -103,7 +103,7 @@ class LazySegmentTree {
                 dat[k] = dat[2*k] + dat[2*k+1];
             }
         }
-        // get min of [a, b)
+        // get sum of [a, b)
         // a and b are 0-indexed
         T get(int a, int b) { return get(a, b, 1, 0, N); }
         T get(int a, int b, int k, int l, int r) {
