@@ -25,4 +25,10 @@
             "${1:name}.rbegin(), ${1:name}.rend()"
         ]
     },
+    "print": {
+        "prefix": "print",
+        "body": [
+            "cout << ${1} << '\\n';"
+        ]
+    },
 }
