@@ -9,7 +9,7 @@ class SCC {
         int N;
         Graph G, revG;
         std::vector<int> comp, ord;
-        void dfs(int cur, std::vector<bool> visited) {
+        void dfs(int cur, std::vector<bool> &visited) {
             visited[cur] = true;
             for (int nx : G[cur]) {
                 if (!visited[nx]) dfs(nx, visited);
