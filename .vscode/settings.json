@@ -74,5 +74,6 @@
         "bit": "cpp",
         "charconv": "cpp",
         "variant": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
