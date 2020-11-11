@@ -9,7 +9,6 @@ template<class T>inline bool chmax(T &a, const T &b) { if (b > a) { a = b; retur
 template<class T>inline bool chmin(T &a, const T &b) { if (b < a) { a = b; return true; } return false; }
 
 constexpr int INF = 1e9;
-constexpr int MOD = 1e9 + 7;
 constexpr long long LINF = 1e18;
 constexpr double EPS = 1e-10;
 constexpr double PI = M_PI;
