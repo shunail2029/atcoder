@@ -6,9 +6,7 @@ bool isPrime(long long n) {
     if (n == 1) return false;
 
     for (long long i=2; i*i<=n; i++) {
-        if (n%i == 0) {
-            return false;
-        }
+        if (n%i == 0) return false;
     }
     return true;
 }
@@ -19,9 +17,7 @@ std::vector<long long> divEnu(long long n) {
     for (long long i=1; i*i<=n; i++) {
         if (n%i == 0) {
             res.push_back(i);
-            if (n/i != i) {
-                res.push_back(n/i);
-            }
+            if (n/i != i) res.push_back(n/i);
         }
     }
     return res;
@@ -36,9 +32,7 @@ std::map<long long, int> primeFact(long long n) {
             n /= i;
         }
     }
-    if (n != 1) {
-        res[n] = 1;
-    }
+    if (n != 1) res[n] = 1;
     return res;
 }
 

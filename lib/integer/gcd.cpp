@@ -18,11 +18,7 @@ long long gcd(long long a, long long b) {
    return value : gcd(a, b)
    a > b を想定 */
 long long extGCD(long long a, long long b, long long &x, long long &y) {
-    if (b == 0) {
-        x = 1;
-        y = 0;
-        return a;
-    }
+    if (b == 0) { x = 1; y = 0; return a; }
     long long d = extGCD(b, a%b, y, x);
     y -= a / b * x;
     return d;

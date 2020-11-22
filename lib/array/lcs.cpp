@@ -9,13 +9,9 @@ int lcs(const std::vector<T> &v1, const std::vector<T> &v2) {
 
     for (int i=0; i<l1; ++i) {
         for (int j=0; j<l2; ++j) {
-            if (v1[i] == v2[j]) {
-                dp[i+1][j+1] = dp[i][j] + 1;
-            } else {
-                dp[i+1][j+1] = std::max(dp[i+1][j], dp[i][j+1]);
-            }
+            if (v1[i] == v2[j]) dp[i+1][j+1] = dp[i][j] + 1;
+            else dp[i+1][j+1] = std::max(dp[i+1][j], dp[i][j+1]);
         }
     }
-
     return dp[l1][l2];
 }

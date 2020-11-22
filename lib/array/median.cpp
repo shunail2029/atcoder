@@ -44,11 +44,7 @@ auto medianOfMedians(RandomAccessIterator first, RandomAccessIterator last, int 
         }
     }
 
-    if (store <= k && k < store + same) {
-        return pivot;
-    } else if (k < store) {
-        return medianOfMedians(first, first+store, k);
-    } else {
-        return medianOfMedians(first+store+same, last, k-store-same);
-    }
+    if (store <= k && k < store + same) return pivot;
+    else if (k < store) return medianOfMedians(first, first+store, k);
+    else return medianOfMedians(first+store+same, last, k-store-same);
 }

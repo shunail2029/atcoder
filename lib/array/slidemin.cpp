@@ -14,9 +14,7 @@ class SlideMin {
         T getMin() { return dat[dq.front()]; }
         int getMinIndex() { return dq.front(); }
         void push(const int i) {
-            while (!dq.empty() && Compare()(dat[i], dat[dq.back()])) {
-                dq.pop_back();
-            }
+            while (!dq.empty() && Compare()(dat[i], dat[dq.back()])) dq.pop_back();
             dq.push_back(i);
         }
         void pop(const int i) { if (dq.front() == i) dq.pop_front(); }

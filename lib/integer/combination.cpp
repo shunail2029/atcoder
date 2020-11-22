@@ -7,33 +7,29 @@ long long comb(long long n, long long r) {
 }
 
 // combination_mod 余りでいい時の組み合わせ数
-constexpr int MOD = 1e9 + 7;
-
-long long inv(long long n) {
+long long inv(long long n, long long mod) {
     long long res = 1;
     while (n > 1) {
-        res *= (MOD - MOD/n);
-        res %= MOD;
-        n = MOD % n;
+        (res *= (mod - mod / n)) %= mod;
+        n = mod % n;
     }
     return res;
 }
 
-long long comb_mod(long long n, long long r) {
+long long comb_mod(long long n, long long r, long long mod) {
     r = (r <= n/2) ? r : n-r;
-    long long nume = 1;
-    long long deno = 1;
     if (r < 0) return 0;
     if (r == 0) return 1;
 
+    long long nume = 1, deno = 1;
     for (long long i=1; i<=r; i++) {
-        deno *= i % MOD;
-        deno %= MOD;
+        deno *= i % mod;
+        deno %= mod;
     }
     for (long long i=n-r+1; i<=n; i++) {
-        nume *= i % MOD;
-        nume %= MOD;
+        nume *= i % mod;
+        nume %= mod;
     }
-    deno = inv(deno);
-    return (deno * nume) % MOD;
+    deno = inv(deno, mod);
+    return (deno * nume) % mod;
 }
