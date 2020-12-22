@@ -15,8 +15,7 @@ long long Dijkstra(const WGraph &G, const int s, const int t) {
     que.push(std::make_pair(0, s));
 
     while (!que.empty()) {
-        auto p = que.top();
-        que.pop();
+        auto p = que.top(); que.pop();
         int v = p.second;
         if (dis[v] < p.first) continue;
         for (auto e : G[v]) {
@@ -40,8 +39,7 @@ long long Dijkstra(WGraph G, const int s, const int t, std::vector<int> &path) {
     que.push(std::make_pair(0, s));
 
     while (!que.empty()) {
-        auto p = que.top();
-        que.pop();
+        auto p = que.top(); que.pop();
         int v = p.second;
         if (dis[v] < p.first) continue;
         for (auto e : G[v]) {
