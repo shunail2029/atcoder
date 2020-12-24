@@ -8,9 +8,7 @@ class Trie {
         std::vector<Trie *> children;
     public:
         Trie(Trie *parent = nullptr) : parent(parent), children(26, nullptr) {}
-        ~Trie() {
-            for (Trie *ptr : children) delete ptr;
-        }
+        ~Trie() { for (Trie *ptr : children) delete ptr; }
         Trie *find(const std::string &str) {
             Trie *ptr = this;
             for (char c : str) {

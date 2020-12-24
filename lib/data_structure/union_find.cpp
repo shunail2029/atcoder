@@ -11,6 +11,8 @@ class UnionFind {
             for (int i=0; i<n; i++) par[i] = i;
             sz.assign(n, 1);
         }
+        // unite x and y
+        // x and y are 0-indexed
         void unite(int x, int y) {
             const int x_par = find(x);
             const int y_par = find(y);
@@ -24,10 +26,14 @@ class UnionFind {
                 sz[x_par] += sz[y_par];
             }
         }
+        // return root of x
+        // x is 0-indexed
         int find(int x) {
             if (par[x] == x) return x;
             else return par[x] = find(par[x]);
         }
+        // return whether x and y are in same group
+        // x and y are 0-indexed
         bool same(int x, int y) { return find(x) == find(y); }
         int size(int x) { return sz[find(x)]; }
 };
@@ -41,6 +47,8 @@ class _UnionFind {
             par.resize(n);
             for (int i=0; i<n; i++) par[i] = i;
         }
+        // unite x and y
+        // x and y are 0-indexed
         void unite(int x, int y) {
             int xPar = find(x);
             int yPar = find(y);
@@ -48,10 +56,14 @@ class _UnionFind {
 
             par[xPar] = yPar;
         }
+        // return root of x
+        // x is 0-indexed
         int find(int x) {
             if (par[x] == x) return x;
             else return par[x] = find(par[x]);
         }
+        // return whether x and y are in same group
+        // x and y are 0-indexed
         bool same(int x, int y) { return find(x) == find(y); }
 };
 

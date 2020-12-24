@@ -1,3 +1,4 @@
+#include <cassert>
 #include <functional>
 #include <limits>
 #include <vector>
@@ -12,6 +13,7 @@ class BinaryIndexedTree {
         BinaryIndexedTree(int n) : N(n), dat(n+1, static_cast<T>(0)) {}
         // a is 1-indexed
         void add(int a, const T v) {
+            assert(0 < a && a <= N);
             while (a <= N) {
                 dat[a] += v;
                 a += (a & -a);
@@ -20,6 +22,7 @@ class BinaryIndexedTree {
         // return sum of [1, a]
         // a is 1-indexed
         T sum(int a) const {
+            assert(a <= N);
             T res = static_cast<T>(0);
             while (a > 0) {
                 res += dat[a];

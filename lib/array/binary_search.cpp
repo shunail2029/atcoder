@@ -3,11 +3,11 @@
 
 // binary_search 二分探索
 template<class T>
-long long binarySearching(const std::vector<T> &str, const T &key, long long imin, long long imax) {
-    int ok = (int)str.size(), ng = -1;
+long long binarySearching(const std::vector<T> &vec, const T key) {
+    int ok = (int)vec.size(), ng = -1;
     while (abs(ok - ng) > 1) {
         int mid = (ok + ng) / 2;
-        if (str[mid] >= key) ok = mid;
+        if (vec[mid] >= key) ok = mid;
         else ng = mid;
     }
     return ok;
